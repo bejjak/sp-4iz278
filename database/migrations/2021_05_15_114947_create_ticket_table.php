@@ -17,8 +17,8 @@ class CreateTicketTable extends Migration
             $table->id('ticket_id');
             $table->string('sector')->nullable();
             $table->integer('seat')->unsigned()->nullable();
-            $table->foreignId('user_id')->constrained('user')->cascadeOnDelete();
-            $table->foreignId('event_id')->constrained('event')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('user')->references('user_id')->cascadeOnDelete();
+            $table->foreignId('event_id')->constrained('event')->references('event_id')->cascadeOnDelete();
             $table->timestamps();
         });
     }

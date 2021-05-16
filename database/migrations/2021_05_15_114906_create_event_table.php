@@ -23,8 +23,8 @@ class CreateEventTable extends Migration
             $table->string('competition')->nullable();
             $table->integer('capacity')->unsigned()->default(0);
             $table->text('description')->nullable();
-            $table->foreignId('sport_id')->constrained('sport')->cascadeOnDelete();
-            $table->foreignId('place_id')->constrained('place')->nullOnDelete();
+            $table->foreignId('sport_id')->constrained('sport')->references('sport_id')->cascadeOnDelete();
+            $table->foreignId('place_id')->nullable()->constrained('place')->references('place_id')->nullOnDelete();
             $table->timestamps();
         });
     }
