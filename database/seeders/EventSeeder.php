@@ -34,7 +34,7 @@ class EventSeeder extends Seeder {
         ]);
 
         Event::create([
-            'event_name' => 'FC  Viktoria Plzeň - AC Sparta Praha',
+            'event_name' => 'FC Viktoria Plzeň - AC Sparta Praha',
             'start_date' => '2022-03-22',
             'img' => 'https://www.sofascore.com/images/share/1x1/viktoria-plzen-sparta-praha-9509435.png',
             'price' => 345,

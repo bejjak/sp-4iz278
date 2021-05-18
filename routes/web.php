@@ -22,6 +22,7 @@ Route::get('/ticket-detail/{id}',[TicketController::class, 'showTicket'])->name(
 Route::get('/cart', [EventController::class, 'cart'])->name('cart');
 Route::get('/profile', [UserController::class, 'show'])->name('profile');
 Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/sports', [SportController::class, 'index'])->name('sports');
 Route::get('/buy/{id}', [EventController::class, 'addToCart'])->name('buy');
 Route::get('/remove/{id}', [EventController::class, 'removeFromCart'])->name('remove');
 Route::get('/purchase', [TicketController::class, 'create'])->name('purchase');

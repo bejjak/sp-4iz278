@@ -5,6 +5,7 @@ namespace App\Models;
 use Decimal\Decimal;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Event extends Model
 {
@@ -28,15 +29,15 @@ class Event extends Model
 
     protected $dates = ['start_date', 'end_date'];
 
-    public function sport() {
+    public function sport(): BelongsTo {
         return $this->belongsTo(Sport::class, 'sport_id');
     }
 
-    public function place() {
+    public function place(): BelongsTo {
         return $this->belongsTo(Place::class, 'place_id');
     }
 
-    public function formatPrice($price) {
+    public function formatPrice($price): string {
         return number_format($price, 2, ',', ' ');
     }
 

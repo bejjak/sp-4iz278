@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -12,6 +13,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.home');
+        $eventsNumber = Event::all()->count();
+        $sportsNumber = Event::all()->count();
+        $homeInfo = [
+            'eventCount' => $eventsNumber,
+            'sportCount' => $sportsNumber];
+
+        return view('pages.home', ['homeInfo' => $homeInfo]);
     }
 }

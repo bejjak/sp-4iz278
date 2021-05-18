@@ -15,6 +15,9 @@
             <li class="nav-item">
                 <a class="nav-link {{ Route::is('events') ? 'active' : '' }}" href="{{route('events')}}">Sport Events</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Route::is('sports') ? 'active' : '' }}" href="{{route('sports')}}">Sports</a>
+            </li>
         </ul>
         <ul class="navbar-nav mr-0">
             @if(auth()->check())

@@ -5,6 +5,7 @@
 </head>
 <body class="antialiased bg-light">
     @include('includes.navbar')
+    <div class="pointer top-button justify-content-center align-items-center" onclick="topFunction()" id="top-button"><i class="fas fa-chevron-up"></i></div>
         @yield('content')
     @include('includes.footer')
 

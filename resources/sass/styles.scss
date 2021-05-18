@@ -4,6 +4,7 @@ html, body {
 
 html {
     font-size: 18px;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -106,6 +107,10 @@ input[type=number] {
     width: 100%;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .ticket-img {
     width: 80%;
 }
@@ -184,4 +189,36 @@ form.login-form, form.register-form {
 
 .ticket-container hr {
     width: 85%;
+}
+
+.profile .nav {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.profile .tab-content {
+    background-color: #3d8aca21;
+}
+
+.sport-image {
+    width: 200px;
+}
+
+.top-button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 20;
+    padding: 5px 7.5px;
+    border-radius: 10px;
+    color: white;
+    background-color: rgba(11, 151, 169, 0.7);
+}
+
+.top-button .fa-chevron-up {
+    font-size: 40px;
+}
+
+.top-button:hover {
+    background-color: rgba(11, 151, 169, 1);
 }

@@ -20,15 +20,17 @@
                 <div class="row cart-item justify-content-around align-items-center">
                     @include('components.cart-event')
                     <div class="spinner row">
-                        <div class="down bg-dark text-white" onclick="this.nextElementSibling.stepDown(1)"><i class="fas fa-minus"></i></div>
+                        <div class="down bg-dark text-white" onclick="itemCartDown(this, {{$event->price}})"><i class="fas fa-minus"></i></div>
                         <input class="spinner-number" type="number" min="1" max="10" value="{{$event->quantity}}">
-                        <div class="up bg-dark text-white" onclick="this.previousElementSibling.stepUp(1)"><i class="fas fa-plus"></i></div>
+                        <div class="up bg-dark text-white" onclick="itemCartUp(this, {{$event->price}})"><i class="fas fa-plus"></i></div>
                     </div>
                     <div><a href="{{route('remove', $event->event_id)}}"><i class="display-4 text-danger far fa-times-circle"></i></a></div>
                 </div>
             @endforeach
 
-            <p class="text-center display-4 font-weight-bold">Total price: {{$event->formatPrice($total)}} CZK</p>
+            <p class="text-center display-4 font-weight-bold">
+                Total price: <span id="total-price">{{$event->formatPrice($total)}}</span> CZK
+            </p>
 
             <div class="row justify-content-center align-items-center mb-3">
                 <a class="btn btn-outline-dark mr-2" href="{{route('events')}}">Go Back Shopping</a>

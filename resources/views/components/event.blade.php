@@ -37,16 +37,19 @@
         </div>
     </div>
     <div class="card-footer buy-section">
-        <div class="d-flex align-items-center justify-content-around">
-            <p class="card-text mb-0 font-weight-bold">{{$event->formatPrice($event->price)}} CZK / ks</p>
+        <div class="d-flex align-items-center justify-content-center">
+            <p class="card-text w-50 mb-0 font-weight-bold text-center">{{$event->formatPrice($event->price)}} CZK / ks</p>
+            <!-- Do not display buy option for not signed user -->
             @if(auth()->check())
-                <!-- Do not display buy option for not signed user -->
-                <div class="spinner row">
-                    <div class="down bg-dark text-white" onclick="this.nextElementSibling.stepDown(1)"><i class="fas fa-minus"></i></div>
-                    <input class="spinner-number" type="number" min="1" max="10" value="1">
-                    <div class="up bg-dark text-white" onclick="this.previousElementSibling.stepUp(1)"><i class="fas fa-plus"></i></div>
-                </div>
-                <a href="{{route('buy', $event->event_id)}}" class="btn btn-primary">Buy</a>
+                <form class="d-flex w-50 justify-content-center align-items-center" action="{{route('buy', $event->event_id)}}" method="GET">
+                    @csrf
+                    <div class="spinner d-flex mr-3">
+                        <div class="down bg-dark text-white" onclick="this.nextElementSibling.stepDown(1)"><i class="fas fa-minus"></i></div>
+                        <input name="{{$event->event_id}}" class="spinner-number" type="number" min="1" max="10" value="1">
+                        <div class="up bg-dark text-white" onclick="this.previousElementSibling.stepUp(1)"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <button type="submit" class="ml-3 btn btn-primary">Buy</button>
+                </form>
             @endif
         </div>
     </div>

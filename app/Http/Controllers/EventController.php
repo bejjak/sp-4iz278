@@ -3,18 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Models\Sport;
-use App\Models\Ticket;
-use App\Models\User;
-use DateTime;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
-use League\Flysystem\Config;
 
 class EventController extends Controller {
     public function index() {
-        $events = Event::all();
+        $events = Event::paginate(6);
         return view('pages.events-offer', ['events' => $events]);
     }
 
@@ -25,23 +17,24 @@ class EventController extends Controller {
         }
 
         $cart = session()->get('cart');
+        $count = request()->get($id);
 
         if (!$cart) {
             $data = [
-                $id => ['quantity' => 1]
+                $id => ['quantity' => $count]
             ];
             session()->put('cart', $data);
         }
 
         // increase event quantity case
         else if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+            $cart[$id]['quantity']+= $count;
             session()->put('cart', $cart);
         }
         // if item not exist in cart then add to cart with quantity = 1
         else {
             $cart[$id] = [
-                "quantity" => 1,
+                "quantity" => $count,
             ];
             session()->put('cart', $cart);
         }
