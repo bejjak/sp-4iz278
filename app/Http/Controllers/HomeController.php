@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Models\Sport;
 
 class HomeController extends Controller
 {
@@ -14,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $eventsNumber = Event::all()->count();
-        $sportsNumber = Event::all()->count();
+        $sportsNumber = Sport::all()->count();
         $homeInfo = [
             'eventCount' => $eventsNumber,
             'sportCount' => $sportsNumber];

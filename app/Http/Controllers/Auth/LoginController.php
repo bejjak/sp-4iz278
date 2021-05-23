@@ -47,18 +47,18 @@ class LoginController extends Controller
         // attempt to do the login
         if (auth()->attempt($userdata))
         {
-            return redirect('/events');
+            return redirect()->route('events');
         }
         else
         {
             // validation not successful, send back to form
-            return redirect('/home');
+            return redirect()->route('home');
         }
     }
 
     public function logout(Request $request) {
         auth()->logout();
         session()->flush();
-        return redirect('/home');
+        return redirect()->route('home');
     }
 }

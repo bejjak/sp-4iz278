@@ -5,7 +5,43 @@
     @include('components.login-sidebar')
 
     <div class="container">
-        <h1 class="text-center font-weight-bold mt-2 mb-3">Events Offer</h1>
+        <h1 class="text-center fw mt-2 mb-3">Events Offer</h1>
+
+        <div class="d-flex justify-content-end mb-3">
+            <div class="d-flex search-bar col-md-4">
+                <div class="d-flex flex-column">
+                    <label for="floatingInput">Search</label>
+                    <div class="d-flex">
+                        <input type="search" class="form-control" id="floatingInput">
+                        <button type="button" class="btn btn-primary">
+                            <i class="text-white fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-end col-md-4">
+                {{ $events->links() }}
+            </div>
+
+            <div class="d-flex col-md-4 justify-content-end">
+                <div>
+                    <label for="sort-by">Sort By</label>
+                    <select id="sort-by" class="form-select" aria-label="Default select example">
+                        <option selected>Choose value</option>
+                        <option value="1">Date</option>
+                        <option value="2">Sport</option>
+                        <option value="3">A-Z</option>
+                    </select>
+                </div>
+                <div class="d-flex flex-column align-items-center">
+                    <label for="sort-order">Sort Order</label>
+                    <a onclick="changeSortOrder()" id="sort-order" class="btn btn-primary text-white">
+                        <i class="fas fa-sort-amount-up" id="sort-order-icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <ul class="nav nav-tabs justify-content-center" id="sportsTab" role="tablist">
             <li class="nav-item">
@@ -22,13 +58,13 @@
 
         </div>
 
-        <div class="d-flex flex-wrap justify-content-around mb-3 mt-2">
+        <div class="d-flex flex-wrap justify-content-center mb-3 mt-2">
             @foreach($events as $event)
                 @include('components.event')
             @endforeach
         </div>
 
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center mb-3">
             {{ $events->links() }}
         </div>
     </div>

@@ -8,7 +8,7 @@
         <label for="login-password">Password</label>
         <input type="password" class="form-control" id="login-password" placeholder="Enter password" name="password">
     </div>
-    <div class="row justify-content-center">
+    <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </div>
 </form>

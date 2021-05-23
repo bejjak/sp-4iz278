@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Ticket;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -25,9 +24,13 @@ class TicketController extends Controller
             for ($i = 0; $i < $item['quantity']; $i++) {
                 Ticket::create($newData);
             }
+
+            //reduce capacity of tickets after buying them
+            $event->capacity -= $item['quantity'];
+            $event->save();
         }
 
-        return redirect('/profile');
+        return redirect()->route('profile');
     }
 
     public function showTicket($id) {

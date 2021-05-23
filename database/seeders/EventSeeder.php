@@ -58,7 +58,7 @@ class EventSeeder extends Seeder {
         Event::create([
             'event_name' => 'Boston Bruins - Pittsburgh Penguins',
             'start_date' => '2022-12-02',
-            'img' => 'https://bostonhockeynow.com/wp-content/uploads/sites/3/2020/01/Bruins-Penguins.png',
+            'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRJiRa7j8O7pKF41xci2S8PBOlEaxqVLpebA&usqp=CAU',
             'price' => 3900,
             'competition' => 'NHL',
             'capacity' => 10,
@@ -86,6 +86,18 @@ class EventSeeder extends Seeder {
             'capacity' => 20,
             'sport_id' => 3,
             'place_id' => 4
+        ]);
+
+        Event::create([
+            'event_name' => 'Azerbaijan Grand Prix',
+            'start_date' => '2022-06-04',
+            'end_date' => '2022-06-06',
+            'img' => 'https://upload.wikimedia.org/wikipedia/commons/a/ac/Baku-F1-Street-Circuit-rev1.png',
+            'price' => 7250,
+            'competition' => 'formula 1',
+            'capacity' => 10,
+            'sport_id' => 3,
+            'place_id' => 5
         ]);
     }
 }

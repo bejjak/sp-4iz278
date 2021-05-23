@@ -52,10 +52,10 @@ class User extends Authenticatable
      * Holding collection of user tickets
      */
     public function tickets(): HasMany {
-        return $this->hasMany(Ticket::class, 'user_id');
+        return $this->hasMany(Ticket::class, 'user_id', 'user_id');
     }
 
     public function favoriteSports(): BelongsToMany {
-        return $this->belongsToMany(Sport::class, 'favorite_sport');
+        return $this->belongsToMany(Sport::class, 'favorite_sport', 'user_id', 'sport_id');
     }
 }

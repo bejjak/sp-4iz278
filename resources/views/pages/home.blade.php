@@ -6,23 +6,23 @@
 
     <div class="content flex-grow-1">
         <header class="page-header gradient text-white">
-            <div class="container intro-section">
-                <div class="row justify-content-center align-items-center">
+            <div class="container-lg intro-section">
+                <div class="d-flex justify-content-center align-items-center">
                     <div class="col-md-6">
-                        <h1 class="text-center font-weight-bold pt-2 pb-3">
-                            <i class="fas fa-ticket-alt mr-1"></i>
+                        <h1 class="text-center fw-bold pt-2 pb-3">
+                            <i class="fas fa-ticket-alt me-1"></i>
                             Sport Ticket
                         </h1>
                         <p>Sport Ticket is an online website where you can purchase tickets to various sport events.
                             We offer tickets to sports like football, basketball, motorsport, etc.</p>
-                        <div class="row justify-content-center">
-                            <a class="btn btn-outline-light mr-3" href="{{route('events')}}">See tickets offer</a>
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-outline-light me-3" href="{{route('events')}}">See tickets offer</a>
                             <a class="btn btn-outline-light" href="{{route('sports')}}">See sports</a>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex image-container">
-                            <img class="ticket-img" src="{{asset('img/ticket.png')}}" alt="ticket image">
+                            <img class="ticket-img lazyload" data-src="{{asset('img/ticket.png')}}" alt="ticket image">
                         </div>
                     </div>
                 </div>
@@ -33,17 +33,17 @@
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-6">
                         <div class="d-flex image-container">
-                            <img class="ticket-img" src="{{asset('img/cart-icon.png')}}" alt="ticket image">
+                            <img class="ticket-img lazyload" data-src="{{asset('img/cart-icon.png')}}" alt="ticket image">
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h1 class="text-center font-weight-bold pt-2 pb-3">
-                            <i class="fas fa-icon-buffer mr-1"></i>
+                        <h1 class="text-center fw-bold pt-2 pb-3">
+                            <i class="fas fa-icon-buffer me-1"></i>
                             Current offer
                         </h1>
-                        <p>You can currently select from:</p>
-                        <div class="d-flex flex-column justify-content-center">
-                            <ul class="font-weight-bold">
+                        <p class="text-center">You can currently select from:</p>
+                        <div>
+                            <ul class="fw-bold d-flex flex-column align-items-center">
                                 <li>{{$homeInfo['eventCount']}} events</li>
                                 <li>{{$homeInfo['sportCount']}} sports</li>
                             </ul>

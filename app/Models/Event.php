@@ -41,7 +41,7 @@ class Event extends Model
         return number_format($price, 2, ',', ' ');
     }
 
-    public function formatDate($date) {
+    public function formatDate($date): string {
         return $date->format('j. n. Y');
     }
 }

@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -16,19 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// routes available without login
+Route::redirect('/', 'home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::view('/event-detail','pages.event-detail');
-Route::get('/ticket-detail/{id}',[TicketController::class, 'showTicket'])->name('show-ticket');
-Route::get('/cart', [EventController::class, 'cart'])->name('cart');
-Route::get('/profile', [UserController::class, 'show'])->name('profile');
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/sports', [SportController::class, 'index'])->name('sports');
-Route::get('/buy/{id}', [EventController::class, 'addToCart'])->name('buy');
-Route::get('/remove/{id}', [EventController::class, 'removeFromCart'])->name('remove');
-Route::get('/purchase', [TicketController::class, 'create'])->name('purchase');
-Route::get('/checkout/{total}', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/events/{id}',[EventController::class, 'showDetail'])->whereNumber('id')->name('event-detail');
 
-//Auth::routes();
+// routes available only after login
+Route::get('/profile', [UserController::class, 'show'])->name('profile')->middleware('auth');
+Route::get('/ticket-detail/{id}',[TicketController::class, 'showTicket'])->whereNumber('id')->name('show-ticket')->middleware('auth');
+Route::get('/cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
+Route::get('/cart/checkout/{total}', [CheckoutController::class, 'index'])->name('checkout')->middleware('auth');
+Route::get('/buy/{id}', [CartController::class, 'add'])->name('buy')->whereNumber('id')->middleware('auth');
+Route::get('/remove/{id}', [CartController::class, 'remove'])->whereNumber('id')->name('remove')->middleware('auth');
+
+Route::post('/cart/purchase', [TicketController::class, 'create'])->name('purchase');
+Route::post('/sports/{sport}/favorite', [SportController::class, 'favoriteSport'])->name('favorite');
+Route::post('/cart/update', [CartController::class, 'changeEventNumber'])->name('update-cart');
+
 Route::namespace('Auth')->group(function () {
     Route::post('/login',[LoginController::class, 'login'])->name('login');
     Route::post('/register', [RegisterController::class, 'store'])->name('register');
