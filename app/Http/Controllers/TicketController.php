@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Ticket;
 use App\Models\User;
+use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\App;
 
 class TicketController extends Controller
 {
@@ -36,5 +38,18 @@ class TicketController extends Controller
     public function showTicket($id) {
         $ticket = Ticket::find($id);
         return view('pages.ticket-detail', ['ticket' => $ticket]);
+    }
+
+    public function createPDF($ticket_id) {
+        $ticket = Ticket::find($ticket_id);
+
+        // share data to view
+        view()->share('employee', $ticket);
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('pages.ticket-detail', ['ticket' => $ticket]);
+        $pdfFileName = 'ticket' . $ticket_id . '.pdf';
+
+        // download PDF file with download method
+        return $pdf->download($pdfFileName);
     }
 }

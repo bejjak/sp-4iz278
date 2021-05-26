@@ -45,8 +45,8 @@
                 </div>
             </div>
             <hr class="w-85 pe-3 ps-3">
-            <!-- TODO PDF ticket output file -->
-            <div>Maybe PDF file output</div>
+            <!-- TODO adjust the look of the pdf file -->
+            <a class="mb-3" href="{{route('ticket-pdf', $ticket->ticket_id)}}">Download PDF output</a>
         </div>
         <a class="mb-3 btn btn-outline-dark" href="{{route('profile')}}"><i class="fas fa-arrow-left me-1"></i>Go Back</a>
     </div>

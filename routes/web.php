@@ -25,6 +25,7 @@ Route::get('/events/{id}',[EventController::class, 'showDetail'])->whereNumber('
 // routes available only after login
 Route::get('/profile', [UserController::class, 'show'])->name('profile')->middleware('auth');
 Route::get('/ticket-detail/{id}',[TicketController::class, 'showTicket'])->whereNumber('id')->name('show-ticket')->middleware('auth');
+Route::get('/ticket-detail/{id}/pdf',[TicketController::class, 'createPDF'])->whereNumber('id')->name('ticket-pdf')->middleware('auth');
 Route::get('/cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
 Route::get('/cart/checkout/{total}', [CheckoutController::class, 'index'])->name('checkout')->middleware('auth');
 Route::get('/buy/{id}', [CartController::class, 'add'])->name('buy')->whereNumber('id')->middleware('auth');
