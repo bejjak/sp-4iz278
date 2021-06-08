@@ -18,7 +18,12 @@
             @endif
             <div class="d-flex justify-content-between flex-wrap w-100 mb-1 pe-3 ps-3">
                 <span>Date:</span>
-                <span>{{$ticket->event->formatDate($ticket->event->start_date)}}</span>
+                <span>
+                    {{$ticket->event->formatDate($ticket->event->start_date)}}
+                    @if($ticket->event->end_date)
+                        {{$ticket->event->formatDate($ticket->event->end_date)}}
+                    @endif
+                </span>
             </div>
             <div class="d-flex justify-content-between flex-wrap w-100 mb-1 pe-3 ps-3">
                 <span>Sport:</span>

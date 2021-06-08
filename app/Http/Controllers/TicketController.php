@@ -62,9 +62,9 @@ class TicketController extends Controller
         $ticket = Ticket::find($ticket_id);
 
         // share data to view
-        view()->share('employee', $ticket);
+        view()->share('ticket', $ticket);
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('pages.ticket-detail', ['ticket' => $ticket]);
+        $pdf->loadView('components.ticket-print', $ticket);
         $pdfFileName = 'ticket' . $ticket_id . '.pdf';
 
         // download PDF file with download method

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 /**
  * Class EventController - handles event related actions
@@ -15,7 +16,7 @@ class EventController extends Controller {
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index() {
-        $events = Event::paginate(6);
+        $events = Event::where('start_date', '>=', Carbon::today())->paginate(6);
         return view('pages.events-offer', ['events' => $events]);
     }
 
