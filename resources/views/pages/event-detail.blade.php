@@ -4,7 +4,15 @@
     <h1 class="text-center fw-bold mt-2 mb-3">{{$event->event_name}}</h1>
 
     <div class="d-flex flex-column align-items-center content flex-grow-1">
-        <img class="w-25 mb-4 br-10 bg-info" src="{{$event->img}}" alt="{{$event->event_name}} image">
+        <div class="d-flex justify-content-around align-items-center">
+            @can('update', $event)
+                <a href="#" class="btn btn-warning"><i class="fas fa-edit me-2"></i>Edit</a>
+            @endcan
+            <img class="w-50 mb-4 br-10 bg-info" src="{{$event->img}}" alt="{{$event->event_name}} image">
+            @can('delete', $event)
+                <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i>Delete</a>
+            @endcan
+        </div>
 
         <div class="bg-secondary text-white pt-4 pb-4 w-50 d-flex flex-column align-items-center br-10">
             <div class="d-flex justify-content-between w-75">
@@ -64,7 +72,7 @@
                 Go Back
             </a>
             <a class="btn btn-outline-primary" href="{{route('buy', $event->event_id)}}">
-                Buy
+                Add to Cart
             </a>
         </div>
     </div>

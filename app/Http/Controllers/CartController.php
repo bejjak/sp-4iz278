@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
+/**
+ * Class CartController - controller for cart related actions
+ * @package App\Http\Controllers
+ */
 class CartController extends Controller
 {
+    /**
+     * Show cart
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index() {
         $eventIds = session()->get('cart');
         $events = [];
@@ -26,12 +34,12 @@ class CartController extends Controller
         return view('pages.cart', ['events' => $events, 'total' => $totalPrice]);
     }
 
+    /**
+     * Method which handles adding event to cart
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function add($id) {
-        $event = Event::find($id);
-        if(!$event) {
-            //todo not found event
-        }
-
         $cart = session()->get('cart');
         $count = request()->get($id);
 
@@ -58,12 +66,12 @@ class CartController extends Controller
         return redirect()->route('cart');
     }
 
+    /**
+     * Method that handles removing event from cart
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function remove($id) {
-        $event = Event::find($id);
-        if(!$event) {
-            //todo not found event
-        }
-
         $cart = session()->get('cart');
         unset($cart[$id]);
         session()->put('cart', $cart);
@@ -71,11 +79,15 @@ class CartController extends Controller
         return redirect()->route('cart');
     }
 
+    /**
+     * Handles when event quantity is increased or decreased
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function changeEventNumber(Request $request) {
         $event_id = $request->post('event_id');
         $increase = $request->post('increase');
 
-//        return $event_id;
         $cart = session()->get('cart');
         $event = Event::find($event_id);
         if (!$event) {
@@ -92,6 +104,16 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
+        session()->save();
+        return back();
+    }
+
+    /**
+     * Handles removing everything from cart
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function emptyCart() {
+        session()->put('cart', []);
         session()->save();
         return back();
     }

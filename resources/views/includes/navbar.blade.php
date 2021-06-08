@@ -26,7 +26,7 @@
             @if(auth()->check())
                 <li class="nav-item flex-center {{ Route::is('profile') ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('profile')}}">
-                        <i class="me-1 fas fa-user"></i>
+                        <i class="fas fa-user-circle"></i>
                         {{auth()->user()->username}}
                     </a>
                     <div class="active-indicator"></div>
@@ -39,19 +39,19 @@
                     <div class="active-indicator"></div>
                 </li>
                 <li class="nav-item flex-center logout ps-1">
-                    <a class="nav-link" href="{{route('logout')}}">
+                    <a class="nav-link" href="{{route('logout')}}" onclick="clearLocalStorage()">
                         <i class="fas fa-sign-out-alt"></i>
                         Log Out
                     </a>
                     <div class="active-indicator"></div>
                 </li>
             @else
-                <li class="nav-item flex-center">
-                    <a class="nav-link" href="#" onclick="showLoginForm()">Sign In</a>
+                <li class="nav-item flex-center {{ Route::is('login-form') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('login-form')}}">Sign In</a>
                     <div class="active-indicator"></div>
                 </li>
-                <li class="nav-item flex-center">
-                    <a class="nav-link" href="#" onclick="showRegisterForm()">Sign Up</a>
+                <li class="nav-item flex-center {{ Route::is('register-form') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('register-form')}}">Sign Up</a>
                     <div class="active-indicator"></div>
                 </li>
             @endif

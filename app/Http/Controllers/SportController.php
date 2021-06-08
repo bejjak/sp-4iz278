@@ -4,7 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Sport;
 
+/**
+ * Class SportController - Handles actions with sports
+ * @package App\Http\Controllers
+ */
 class SportController extends Controller {
+    /**
+     * Shows sports
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index() {
         $sports = Sport::all();
         return view('pages.sports', ['sports' => $sports]);

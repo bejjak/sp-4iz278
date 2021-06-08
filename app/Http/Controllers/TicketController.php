@@ -8,8 +8,16 @@ use App\Models\User;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\App;
 
+/**
+ * Class TicketController - Handles actions related to tickets
+ * @package App\Http\Controllers
+ */
 class TicketController extends Controller
 {
+    /**
+     * Creates new ticket
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function create() {
         $cart = session()->get('cart');
         session()->remove('cart');
@@ -35,11 +43,21 @@ class TicketController extends Controller
         return redirect()->route('profile');
     }
 
+    /**
+     * Shows specific ticket
+     * @param $id - id of ticket
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function showTicket($id) {
         $ticket = Ticket::find($id);
         return view('pages.ticket-detail', ['ticket' => $ticket]);
     }
 
+    /**
+     * Generates pdf output for ticket
+     * @param $ticket_id - id of ticket
+     * @return mixed
+     */
     public function createPDF($ticket_id) {
         $ticket = Ticket::find($ticket_id);
 

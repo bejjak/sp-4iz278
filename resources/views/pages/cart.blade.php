@@ -8,9 +8,16 @@
             <h3 class="text-center">No tickets selected yet</h3>
             <hr>
             <div class="d-flex justify-content-center align-items-center mb-3">
-                <a class="btn btn-outline-dark me-2" href="{{route('events')}}">Go Shopping</a>
-                <a class="btn btn-outline-dark me-2" href="{{route('home')}}">Go Home</a>
-                <a class="btn btn-outline-dark" href="{{route('profile')}}">See Profile</a>
+                <a class="btn btn-outline-dark me-2" href="{{route('events')}}">
+                    <i class="fas fa-cart-plus me-1"></i>
+                    Go Shopping</a>
+                <a class="btn btn-outline-dark me-2" href="{{route('home')}}">
+                    <i class="fas fa-home me-1"></i>
+                    Go Home
+                </a>
+                <a class="btn btn-outline-dark" href="{{route('profile')}}">
+                    <i class="fas fa-user-circle me-1"></i>
+                    See Profile</a>
             </div>
         @else
             <h3 class="text-center">Selected tickets</h3>
@@ -34,9 +41,11 @@
 
             <form action="">
                 <div class="d-flex justify-content-center mb-4 mt-3">
-                    <button class="btn btn-danger" onclick="return confirm('Are you sure? This will remove all items from cart.')">
+                    <a class="btn btn-danger"
+                            onclick="return confirm('Are you sure? This will remove all items from cart.')"
+                            href="{{route('cart.empty')}}">
                         <i class="fas fa-trash-alt me-2"></i>Empty Cart
-                    </button>
+                    </a>
                 </div>
             </form>
 

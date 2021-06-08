@@ -17,23 +17,7 @@ $(document).ready(() => {
 const token = document.head.querySelector('meta[name="csrf-token"]');
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 
-window.showLoginForm = function() {
-    hideRegisterForm();
-    document.getElementById('login-sidebar').style.width = '40%';
-}
-
-window.hideLoginForm = function () {
-    document.getElementById('login-sidebar').style.width = "0";
-}
-
-window.showRegisterForm = function () {
-    hideLoginForm();
-    document.getElementById('register-sidebar').style.width = '40%';
-}
-
-window.hideRegisterForm = function () {
-    document.getElementById('register-sidebar').style.width = "0";
-}
+window.clearLocalStorage = () => localStorage.clear();
 
 window.itemCartUp = function (element, price, event_id) {
     let result = handleCartItemUpDown(element, price, event_id, true);
@@ -115,6 +99,21 @@ window.changeSortOrder = () => {
     }
 }
 
+window.changeSortBy = (value) => {
+    axios.get('/events/get', { params: { by: value, order: 'asc' } } )
+        .then(response => {
+            console.log(response.data);
+            if (response.status === 200) {
+                document.getElementById('events-group-wrapper').innerHTML = response.data;
+            }
+        })
+        .catch(response => console.log(response.data));
+}
+
+/**
+ * Function to handle user favoriting or unfavoriting of sport
+ * @param sport_id - id of sport
+ */
 window.favoriteSport = (sport_id) => {
     const element = document.getElementById(sport_id.toString());
 
@@ -127,16 +126,26 @@ window.favoriteSport = (sport_id) => {
     }
 
     axios.post('/sports/' + sport_id + '/favorite')
-        .then(response => this.isFavorited = true)
+        .then()
         .catch(response => console.log(response.data));
 }
 
 window.showLastProfileTab = () => {
-    const lastItem = localStorage.getItem('lastItem')
+    const lastItem = localStorage.getItem('lastItem');
 
     if (lastItem) {
         const pillElement = document.querySelector(lastItem);
         const tab = new bootstrap.Tab(pillElement);
         tab.show();
     }
+}
+
+window.showOrHideChangeImageInput = ($sport_id) => {
+    const element = document.getElementById('change-image-input-' + $sport_id);
+    element.style.display = element.style.display === 'none' ? 'flex' : 'none';
+    element.style.display === 'flex' && element.firstElementChild.firstElementChild.focus();
+}
+
+window.emptyCart = () => {
+
 }

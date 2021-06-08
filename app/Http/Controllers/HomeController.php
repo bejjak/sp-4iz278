@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Sport;
 
+/**
+ * Class HomeController - handles showing home page
+ * @package App\Http\Controllers
+ */
 class HomeController extends Controller
 {
     /**

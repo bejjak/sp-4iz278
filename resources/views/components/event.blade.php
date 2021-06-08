@@ -2,7 +2,7 @@
     <div class="d-flex no-gutters pb-2 card-upper">
         <div class="col-md-4 mt-2 ms-2">
             <div class="image-container d-flex">
-                <img data-src="{{$event->img}}" class="card-img lazyload" alt="{{$event->event_name}}">
+                <img data-src="{{$event->img}}" src="{{$event->img}}" class="card-img lazyload" alt="{{$event->event_name}}">
             </div>
         </div>
         <div class="flex-grow-1 d-flex flex-column justify-content-between">

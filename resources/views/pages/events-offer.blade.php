@@ -1,9 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-    @include('components.register-sidebar')
-    @include('components.login-sidebar')
-
     <div class="container">
         <h1 class="text-center fw mt-2 mb-3">Events Offer</h1>
 
@@ -27,11 +24,11 @@
             <div class="d-flex col-md-4 justify-content-end">
                 <div>
                     <label for="sort-by">Sort By</label>
-                    <select id="sort-by" class="form-select" aria-label="Default select example">
+                    <select id="sort-by" onchange="changeSortBy(this.value)" name="sort-by" class="form-select" aria-label="Default select example">
                         <option selected>Choose value</option>
-                        <option value="1">Date</option>
-                        <option value="2">Sport</option>
-                        <option value="3">A-Z</option>
+                        <option value="event_id" data-sorting_type="asc" id="id-sort">Default</option>
+                        <option value="price" data-sorting_type="asc" id="price-sort">Price</option>
+                        <option value="event_name" data-sorting_type="asc" id="alpha-sort">Event Name</option>
                     </select>
                 </div>
                 <div class="d-flex flex-column align-items-center">
@@ -58,10 +55,8 @@
 
         </div>
 
-        <div class="d-flex flex-wrap justify-content-center mb-3 mt-2">
-            @foreach($events as $event)
-                @include('components.event')
-            @endforeach
+        <div class="d-flex flex-wrap justify-content-center mb-3 mt-2" id="events-group-wrapper">
+            @include('components.events-group')
         </div>
 
         <div class="d-flex justify-content-center mb-3">
