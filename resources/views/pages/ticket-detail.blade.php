@@ -13,7 +13,7 @@
             <div class="d-flex justify-content-between flex-wrap w-100 mb-1 pe-3 ps-3">
                 <span>Place:</span>
                 <!-- TODO check for place country, display if available -->
-                <span>{{$ticket->event->place->place_name}}, {{$ticket->event->place->city}}</span>
+                <span>{{$ticket->event->place->place_name}}, {{$ticket->event->place->city}}@if($ticket->event->place->country), {{$ticket->event->place->country}} @endif</span>
             </div>
             @endif
             <div class="d-flex justify-content-between flex-wrap w-100 mb-1 pe-3 ps-3">
