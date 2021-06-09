@@ -48,5 +48,17 @@ class PlaceSeeder extends Seeder {
             'city' => 'Boston',
             'country' => 'USA'
         ]);
+
+        Place::create([
+            'place_name' => 'Staples Center',
+            'city' => 'Los Angeles',
+            'country' => 'USA'
+        ]);
+
+        Place::create([
+            'place_name' => 'All England Lawn Tennis and Croquet Club',
+            'city' => 'Wimbledon',
+            'country' => 'England'
+        ]);
     }
 }
