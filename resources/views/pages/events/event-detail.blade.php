@@ -4,13 +4,18 @@
     <h1 class="text-center fw-bold mt-2 mb-3">{{$event->event_name}}</h1>
 
     <div class="d-flex flex-column align-items-center content flex-grow-1">
-        <div class="d-flex justify-content-around align-items-center">
+        <div class="d-flex justify-content-center align-items-center">
             @can('update', $event)
-                <a href="#" class="btn btn-warning"><i class="fas fa-edit me-2"></i>Edit</a>
+                <a href="{{route('event.edit', $event->event_id)}}" class="btn btn-warning"><i class="fas fa-edit me-2"></i>Edit</a>
             @endcan
-            <img class="w-50 mb-4 br-10 bg-info" src="{{$event->img}}" alt="{{$event->event_name}} image">
+            <div class="ms-5 me-5 d-flex justify-content-center">
+                <img style="width: 200px;" class="mb-4 br-10 bg-info" src="{{$event->img}}" alt="{{$event->event_name}} image">
+            </div>
             @can('delete', $event)
-                <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i>Delete</a>
+                <form action="{{route('event.delete', $event->event_id)}}" method="POST">
+                    @csrf
+                    <button type="submit" onclick="return confirm('Do you really want to delete this event?')" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i>Delete</button>
+                </form>
             @endcan
         </div>
 

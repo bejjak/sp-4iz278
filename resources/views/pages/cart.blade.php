@@ -39,15 +39,14 @@
                 Total price: <span id="total-price">{{$event->formatPrice($total)}}</span> CZK
             </p>
 
-            <form action="">
-                <div class="d-flex justify-content-center mb-4 mt-3">
-                    <a class="btn btn-danger"
-                            onclick="return confirm('Are you sure? This will remove all items from cart.')"
-                            href="{{route('cart.empty')}}">
-                        <i class="fas fa-trash-alt me-2"></i>Empty Cart
-                    </a>
-                </div>
-            </form>
+
+            <div class="d-flex justify-content-center mb-4 mt-3">
+                <a class="btn btn-danger"
+                        onclick="return confirm('Are you sure? This will remove all items from cart.')"
+                        href="{{route('cart.empty')}}">
+                    <i class="fas fa-trash-alt me-2"></i>Empty Cart
+                </a>
+            </div>
 
             <hr>
             <div class="d-flex justify-content-center align-items-center mb-3">

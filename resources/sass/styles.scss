@@ -84,13 +84,13 @@ body {
     background-color: #7d7c7c !important;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.spinner input::-webkit-outer-spin-button,
+.spinner input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-input[type=number] {
+.spinner input[type=number] {
     -moz-appearance: textfield;
 }
 

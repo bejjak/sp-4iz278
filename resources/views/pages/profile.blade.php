@@ -63,6 +63,9 @@
                 </div>
                 <div id="settings" class="tab-pane fade" role="tabpanel" aria-labelledby="settings-tab">
                     <h3>Settings</h3>
+
+                    @include('components.result-messages')
+
                     <div class="accordion me-4 w-75 mb-4" id="settings-accordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading-password">
@@ -72,13 +75,16 @@
                             </h2>
                             <div class="accordion-collapse collapse" id="changePassword">
                                 <div class="accordion-body w-75">
-                                    <label for="currentPassword">Enter current password</label>
-                                    <input type="text" class="form-control" id="currentPassword">
-                                    <label for="newPassword">Enter new password</label>
-                                    <input type="text" class="form-control" id="newPassword">
-                                    <label for="confirmPassword">Confirm new password</label>
-                                    <input type="text" class="form-control" id="confirmPassword">
-                                    <button type="submit" class="btn btn-danger mt-2 text-white">Submit</button>
+                                    <form action="{{route('password')}}" method="POST">
+                                        @csrf
+                                        <label for="currentPassword">Enter current password</label>
+                                        <input type="password" class="form-control" id="currentPassword" name="curr_pass">
+                                        <label for="newPassword">Enter new password</label>
+                                        <input type="password" class="form-control" id="newPassword" name="new_pass">
+                                        <label for="confirmPassword">Confirm new password</label>
+                                        <input type="password" class="form-control" id="confirmPassword" name="new_pass_confirmation">
+                                        <button type="submit" class="btn btn-danger mt-2 text-white">Submit</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -90,9 +96,14 @@
                             </h2>
                             <div class="accordion-collapse collapse" id="changeUsername">
                                 <div class="accordion-body w-75">
-                                    <label for="currentPassword">Change your username</label>
-                                    <input type="text" class="form-control" id="username" value="{{$user->username}}">
-                                    <button type="submit" class="btn btn-danger mt-2 text-white">Submit</button>
+                                    <form action="{{route('username')}}" method="POST">
+                                        @csrf
+                                        <label for="currentPassword">Change your username</label>
+                                        <input type="text" class="form-control" id="username" value="{{$user->username}}" name="username">
+                                        <label for="currentPassword">Enter password</label>
+                                        <input type="password" class="form-control" id="currentPassword" name="uname_pass">
+                                        <button type="submit" class="btn btn-danger mt-2 text-white">Submit</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -104,9 +115,14 @@
                             </h2>
                             <div class="accordion-collapse collapse" id="changeEmail">
                                 <div class="accordion-body w-75">
-                                    <label for="email">Change email address</label>
-                                    <input type="text" class="form-control" id="email" value="{{$user->email}}">
-                                    <button type="submit" class="btn btn-danger mt-2 text-white">Submit</button>
+                                    <form action="{{route('email')}}" method="POST">
+                                        @csrf
+                                        <label for="email">Change email address</label>
+                                        <input type="text" class="form-control" id="email" value="{{$user->email}}" name="email">
+                                        <label for="currentPassword">Enter password</label>
+                                        <input type="password" class="form-control" id="currentPassword" name="email_pass">
+                                        <button type="submit" class="btn btn-danger mt-2 text-white">Submit</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

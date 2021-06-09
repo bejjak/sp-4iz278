@@ -4,6 +4,12 @@
     <div class="container">
         <h1 class="text-center fw mt-2 mb-3">Events Offer</h1>
 
+        @can('create', \App\Models\Event::class)
+            <div class="d-flex justify-content-center mb-3">
+                <a href="{{route('event.create')}}" class="btn btn-outline-success"><i class="fas fa-plus me-2"></i>Create new event</a>
+            </div>
+        @endcan
+
         <div class="d-flex justify-content-end mb-3">
             <div class="d-flex search-bar col-md-4">
                 <div class="d-flex flex-column">
