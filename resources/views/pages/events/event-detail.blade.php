@@ -76,9 +76,11 @@
                 <i class="fas fa-arrow-left"></i>
                 Go Back
             </a>
+            @if(auth()->check())
             <a class="btn btn-outline-primary" href="{{route('buy', $event->event_id)}}">
                 Add to Cart
             </a>
+            @endif
         </div>
     </div>
 @endsection
