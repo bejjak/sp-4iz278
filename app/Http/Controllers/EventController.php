@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Sport;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,8 @@ class EventController extends Controller {
      */
     public function index() {
         $events = Event::where('start_date', '>=', Carbon::today())->paginate(6);
-        return view('pages.events.events-offer', ['events' => $events]);
+        $sports = Sport::all();
+        return view('pages.events.events-offer', ['events' => $events, 'sports' => $sports]);
     }
 
     /**
@@ -29,9 +31,31 @@ class EventController extends Controller {
      * @return string
      */
     public function fetchData(Request $request) {
+//        $sort_by = $request->get('by');
+//        $order = $request->get('order');
+//        $events = Event::query()->orderBy($sort_by, $order)->paginate(6);
+//        return view('components.events-group', ['events' => $events])->render();
+
         $sort_by = $request->get('by');
         $order = $request->get('order');
-        $events = Event::query()->orderBy($sort_by, $order)->paginate(6);
+        $filterValue = strtolower($request->get('filter'));
+        if ($filterValue == 'all') {
+            $events = Event::query()->orderBy($sort_by, $order)->paginate(6);
+        }
+        else if ($filterValue == 'favorites') {
+            $user = User::find(auth()->user()->user_id);
+            $favoriteSports = $user->favoriteSports();
+            $ids = [];
+            foreach ($favoriteSports as $favorite) {
+                array_push($ids, $favorite->sport_id);
+            }
+
+            $events = Event::query()->whereIn('sport_id', $ids)->orderBy($sort_by, $order)->get();
+        }
+        else {
+            $events = Event::where('sport_id', $filterValue)->orderBy($sort_by, $order)->get();
+        }
+
         return view('components.events-group', ['events' => $events])->render();
     }
 

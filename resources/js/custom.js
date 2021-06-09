@@ -101,13 +101,19 @@ window.changeSortOrder = () => {
     const sortOrder = document.getElementById('sort-order');
     const newOrder = sortOrder.getAttribute('data-sort') === 'asc' ? 'desc' : 'asc';
     sortOrder.setAttribute('data-sort', newOrder);
-    const orderBy = document.getElementById('sort-by').value;
-    changeSortBy(orderBy);
+    changeSortBy();
 }
 
-window.changeSortBy = (value) => {
+window.changeSortBy = () => {
+    const sportFilter = document.getElementById('sport-filter').value;
+    filterSport(sportFilter);
+}
+
+window.filterSport = (value) => {
+    const orderBy = document.getElementById('sort-by').value;
     const order = document.getElementById('sort-order').getAttribute('data-sort');
-    axios.get('/events/get', { params: { by: value, order: order } } )
+
+    axios.get('/events/get', { params: { filter: value, by: orderBy, order: order } } )
         .then(response => {
             console.log(response.data);
             if (response.status === 200) {
