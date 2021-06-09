@@ -16,7 +16,9 @@
                     <label for="sport-filter">Filter by Sport</label>
                     <select id="sport-filter" onchange="filterSport(this.value)" name="filter-sport" class="form-select" aria-label="Default select example">
                         <option selected value="all">All</option>
+                        @if(auth()->check())
                         <option value="favorites">Favorites</option>
+                        @endif
                         @foreach($sports as $sport)
                             <option value="{{$sport->sport_id}}">{{ucfirst($sport->sport_name)}}</option>
                         @endforeach
