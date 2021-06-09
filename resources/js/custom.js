@@ -97,10 +97,17 @@ window.changeSortOrder = () => {
         element.classList.remove('fa-sort-amount-down');
         element.classList.add('fa-sort-amount-up');
     }
+
+    const sortOrder = document.getElementById('sort-order');
+    const newOrder = sortOrder.getAttribute('data-sort') === 'asc' ? 'desc' : 'asc';
+    sortOrder.setAttribute('data-sort', newOrder);
+    const orderBy = document.getElementById('sort-by').value;
+    changeSortBy(orderBy);
 }
 
 window.changeSortBy = (value) => {
-    axios.get('/events/get', { params: { by: value, order: 'asc' } } )
+    const order = document.getElementById('sort-order').getAttribute('data-sort');
+    axios.get('/events/get', { params: { by: value, order: order } } )
         .then(response => {
             console.log(response.data);
             if (response.status === 200) {
@@ -146,6 +153,3 @@ window.showOrHideChangeImageInput = ($sport_id) => {
     element.style.display === 'flex' && element.firstElementChild.firstElementChild.focus();
 }
 
-window.emptyCart = () => {
-
-}

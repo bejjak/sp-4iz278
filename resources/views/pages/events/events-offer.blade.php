@@ -11,18 +11,6 @@
         @endcan
 
         <div class="d-flex justify-content-end mb-3">
-            <div class="d-flex search-bar col-md-4">
-                <div class="d-flex flex-column">
-                    <label for="floatingInput">Search</label>
-                    <div class="d-flex">
-                        <input type="search" class="form-control" id="floatingInput">
-                        <button type="button" class="btn btn-primary">
-                            <i class="text-white fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
             <div class="d-flex justify-content-center align-items-end col-md-4">
                 {{ $events->links() }}
             </div>
@@ -39,7 +27,7 @@
                 </div>
                 <div class="d-flex flex-column align-items-center">
                     <label for="sort-order">Sort Order</label>
-                    <a onclick="changeSortOrder()" id="sort-order" class="btn btn-primary text-white">
+                    <a onclick="changeSortOrder()" id="sort-order" class="btn btn-primary text-white" data-sort="asc">
                         <i class="fas fa-sort-amount-up" id="sort-order-icon"></i>
                     </a>
                 </div>
