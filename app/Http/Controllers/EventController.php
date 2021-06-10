@@ -20,7 +20,8 @@ class EventController extends Controller {
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index() {
-        $events = Event::where('start_date', '>=', Carbon::today())->paginate(6);
+        $events = Event::where('start_date', '>=', Carbon::today())->orderBy('event_id', 'asc')->paginate(6);
+        $events->appends(['filter' => 'all', 'by' => 'event_id', 'order' => 'asc']);
         $sports = Sport::all();
         return view('pages.events.events-offer', ['events' => $events, 'sports' => $sports]);
     }
@@ -35,7 +36,7 @@ class EventController extends Controller {
         $order = $request->get('order');
         $filterValue = strtolower($request->get('filter'));
         if ($filterValue == 'all') {
-            $events = Event::query()->orderBy($sort_by, $order)->paginate(6);
+            $events = Event::query()->where('start_date', '>=', Carbon::today())->orderBy($sort_by, $order)->paginate(6);
         }
         else if ($filterValue == 'favorites') {
             $favoriteSports = auth()->user()->favoriteSports;
@@ -44,11 +45,19 @@ class EventController extends Controller {
                 array_push($ids, $favorite->sport_id);
             }
 
-            $events = Event::query()->whereIn('sport_id', $ids)->orderBy($sort_by, $order)->get();
+            $events = Event::query()
+                ->where('start_date', '>=', Carbon::today())
+                ->whereIn('sport_id', $ids)
+                ->orderBy($sort_by, $order)
+                ->paginate(6);
         }
         else {
-            $events = Event::where('sport_id', $filterValue)->orderBy($sort_by, $order)->get();
+            $events = Event::where('start_date', '>=', Carbon::today())
+                ->where('sport_id', $filterValue)
+                ->orderBy($sort_by, $order)->paginate(6);
         }
+
+        $events->appends(['filter' => $filterValue, 'by' => $sort_by, 'order' => $order]);
 
         return view('components.events-group', ['events' => $events])->render();
     }

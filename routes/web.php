@@ -22,7 +22,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //region events
 Route::get('/events', [EventController::class, 'index'])->name('events');
-Route::get('/events/get', [EventController::class, 'fetchData'])->name('sort');
+Route::get('/events/fetch', [EventController::class, 'fetchData'])->name('fetch');
 Route::get('/events/{id}',[EventController::class, 'showDetail'])->whereNumber('id')->name('event-detail');
 Route::get('/events/create', [EventController::class, 'createEvent'])->name('event.create')->middleware('admin');
 Route::post('/events/create/do', [EventController::class, 'doCreate'])->name('event.create.do')->middleware('admin');
