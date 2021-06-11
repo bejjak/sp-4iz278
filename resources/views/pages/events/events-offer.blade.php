@@ -14,13 +14,14 @@
             <div class="d-flex sports-filter col-md-4">
                 <div>
                     <label for="sport-filter">Filter by Sport</label>
+                    {{$filter}}
                     <select id="sport-filter" onchange="fetchData()" name="filter-sport" class="form-select" aria-label="Default select example">
-                        <option selected value="all">All</option>
+                        <option {{$filter == 'all' ? 'selected' : ''}} value="all">All</option>
                         @if(auth()->check())
                         <option value="favorites">Favorites</option>
                         @endif
                         @foreach($sports as $sport)
-                            <option value="{{$sport->sport_id}}">{{ucfirst($sport->sport_name)}}</option>
+                            <option {{$sport->sport_id == $filter ? 'selected' : ''}} value="{{$sport->sport_id}}">{{ucfirst($sport->sport_name)}}</option>
                         @endforeach
                     </select>
                 </div>
