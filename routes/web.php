@@ -37,7 +37,7 @@ Route::get('/sports', [SportController::class, 'index'])->name('sports');
 Route::post('/sports/create', [SportController::class, 'createSport'])->name('sport.create')->middleware('admin');;
 Route::post('/sports/{id}/update', [SportController::class, 'updateSport'])->name('sport.update')->middleware('admin');;
 Route::post('/sports/{id}/delete', [SportController::class, 'deleteSport'])->name('sport.delete')->middleware('admin');;
-Route::get('/sports/{sport}/favorite', [SportController::class, 'favoriteSport'])->name('favorite')->middleware('auth');
+Route::post('/sports/{sport}/favorite', [SportController::class, 'favoriteSport'])->name('favorite')->middleware('auth');
 //endregion
 
 Route::get('/login', [LoginController::class, 'index'])->name('login-form');
