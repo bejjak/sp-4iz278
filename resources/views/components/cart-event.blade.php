@@ -1,6 +1,6 @@
-<div class="cart-card card mb-3 bg-info text-white" style="max-width: 540px;">
-    <div class="d-flex flex-nowrap no-gutters card-upper">
-        <div class="col-md-4 mt-2 ms-2 mb-2">
+<div class="cart-card card bg-info text-white" style="max-width: 540px;">
+    <div class="d-flex flex-wrap no-gutters card-upper justify-content-center">
+        <div class="d-flex m-2" style="max-width: 8rem">
             <div class="image-container d-flex">
                 <img data-src="{{$event->img}}" class="card-img lazyload" alt="{{$event->event_name}}">
             </div>

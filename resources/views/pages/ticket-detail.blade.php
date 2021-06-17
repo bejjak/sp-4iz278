@@ -4,7 +4,7 @@
     <h1 class="text-center fw-bold mt-2 mb-3">Ticket Detail</h1>
 
     <div class="d-flex flex-column align-items-center flex-grow-1">
-        <div class="ticket-container mb-3 d-flex flex-column align-items-center">
+        <div class="ticket-container mb-3 d-flex flex-column align-items-center ms-3 me-3">
             <h3 class="w-100 text-center bg-info text-white">Ticket #{{$ticket->ticket_id}}</h3>
             <div class="d-flex justify-content-center flex-wrap w-100 mb-1 pe-3 ps-3">
                 <span class="fw-bold">{{$ticket->event->event_name}}</span>

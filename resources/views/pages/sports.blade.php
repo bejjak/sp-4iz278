@@ -32,7 +32,7 @@
     <div class="container d-flex flex-column align-items-center">
         <div class="d-flex flex-wrap justify-content-center">
             @foreach($sports as $sport)
-                <div class="d-flex flex-column p-3 me-4">
+                <div class="d-flex flex-column p-3 m-2">
                     <h5 class="fw-bold text-center mb-0 pb-2 pt-2 bg-secondary text-white">{{ucfirst($sport->sport_name)}}</h5>
                     <a href="{{route('events', ['filter' => $sport->sport_id])}}">
                         <div class="sport-image">

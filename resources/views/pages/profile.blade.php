@@ -3,8 +3,8 @@
 @section('content')
     <h1 class="text-center fw-bold mt-2 mb-3">Profile</h1>
 
-    <div class="container profile mb-5">
-        <div class="d-flex ms-5 h-100">
+    <div class="ms-3 me-3 profile mb-5">
+        <div class="d-flex h-100">
             <div class="nav flex-column nav-pills profile-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" data-bs-target="#profile" data-bs-toggle="pill" href="#profile" id="profile-tab">
                     <i class="fas fa-info-circle me-2"></i>Profile Info
@@ -55,27 +55,41 @@
                 <div id="sports" class="tab-pane fade" role="tabpanel" aria-labelledby="sports-tab">
                     <h3>{{ucfirst($user->username)}}'s favorite sports</h3>
 
-                    @if(isset($message) && !empty($message))
-                    <div class="alert alert-success">
-                        <p>{{$message}}</p>
+                    @if(session()->has('message'))
+                    <div class="alert alert-success me-4">
+                        <p class="mb-0">{{session()->get('message')['msg']}}</p>
+                        @if(session()->get('message')['status'] == 1)
+                            <form action="{{route('profile.favorite', session()->get('message')['lastId'])}}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-link">
+                                    <i class="fas fa-undo me-1"></i>Revert this action
+                                </button>
+                            </form>
+                        @endif
                     </div>
                     @endif
 
-                    <ul class="list-group mb-4 col-md-6">
+                    <ul class="list-group mb-4 col-md-6 me-4">
                         @foreach($user->favoriteSports as $favorite)
                             <li class="list-group-item list-group-item-action list-group-item-dark d-flex justify-content-between align-items-center">
                                 {{ucfirst($favorite->sport_name)}}
+                                <form action="{{route('profile.favorite', $favorite->sport_id)}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger text-white">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
                             </li>
                         @endforeach
                     </ul>
                     <a class="btn btn-outline-dark" href="{{route('sports')}}">Go to Sports</a>
                 </div>
-                <div id="settings" class="tab-pane fade" role="tabpanel" aria-labelledby="settings-tab">
+                <div id="settings" class="tab-pane fade me-4" role="tabpanel" aria-labelledby="settings-tab">
                     <h3>Settings</h3>
 
                     @include('components.result-messages')
 
-                    <div class="accordion me-4 w-75 mb-4" id="settings-accordion">
+                    <div class="accordion mb-4" id="settings-accordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading-password">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#changePassword" aria-expanded="false" aria-controls="changePassword">
@@ -83,7 +97,7 @@
                                 </button>
                             </h2>
                             <div class="accordion-collapse collapse" id="changePassword">
-                                <div class="accordion-body w-75">
+                                <div class="accordion-body">
                                     <form action="{{route('password')}}" method="POST">
                                         @csrf
                                         <label for="currentPassword">Enter current password</label>
@@ -104,7 +118,7 @@
                                 </button>
                             </h2>
                             <div class="accordion-collapse collapse" id="changeUsername">
-                                <div class="accordion-body w-75">
+                                <div class="accordion-body">
                                     <form action="{{route('username')}}" method="POST">
                                         @csrf
                                         <label for="currentPassword">Change your username</label>
@@ -123,7 +137,7 @@
                                 </button>
                             </h2>
                             <div class="accordion-collapse collapse" id="changeEmail">
-                                <div class="accordion-body w-75">
+                                <div class="accordion-body">
                                     <form action="{{route('email')}}" method="POST">
                                         @csrf
                                         <label for="email">Change email address</label>

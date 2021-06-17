@@ -121,7 +121,8 @@ window.fetchData = () => {
     axios.get('/events/fetch', { params: { page: currentPage, filter: filterValue, by: orderBy, order: order } } )
         .then(response => {
             if (response.status === 200) {
-                document.getElementById('render-group-wrapper').innerHTML = response.data;
+                console.log(response.data);
+                document.getElementById('render-group-wrapper').innerHTML = response.data.html;
             }
         })
         .catch(response => console.log(response.data));

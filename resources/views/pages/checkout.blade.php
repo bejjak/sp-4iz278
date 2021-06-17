@@ -6,14 +6,14 @@
     <div class="container mt-2">
         <p class="text-center display-4 fw-bold">Total price: {{$total}} CZK</p>
 
-        <div class="d-flex justify-content-center align-items-center">
-            <a href="{{route('cart')}}" class="btn btn-outline-dark me-2">
+        <div class="d-flex justify-content-center align-items-center flex-wrap">
+            <a href="{{route('cart')}}" class="btn btn-outline-dark me-2 mb-3">
                 <i class="fas fa-arrow-left me-1"></i>
                 Back to Cart
             </a>
             <form action="{{route('purchase')}}" method="post">
                 @csrf
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-success mb-3">
                     <i class="fas fa-wallet me-1"></i>
                     Checkout
                 </button>

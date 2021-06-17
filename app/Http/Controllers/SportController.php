@@ -31,6 +31,30 @@ class SportController extends Controller {
         return back();
     }
 
+    /**
+     * Will make a sport favorite or remove sport from user favorites if already there
+     * @param Sport $sport
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function favoriteSportProfile(Sport $sport) {
+        // will add relation or remove it if already present -> function toggle
+        auth()->user()->favoriteSports()->toggle($sport->sport_id);
+
+        $lastId = $sport->sport_id;
+
+        $ids = [];
+        foreach(auth()->user()->favoriteSports as $favorite) {
+            array_push($ids, $favorite->sport_id);
+        }
+
+        $message = in_array($sport->sport_id, $ids)
+            ? ['status' => 0, 'msg' => 'You have succesfully reverted this action. ' . ucfirst($sport->sport_name) . ' is back in favorites.', 'lastId' => $lastId]
+            : ['status' => 1, 'msg' => 'You have succesfully removed ' . $sport->sport_name . ' from favorites.', 'lastId' => $lastId];
+
+
+        return redirect()->route('profile')->with('message', $message);
+    }
+
     public function createSport(Request $request) {
         $validator = Validator::make($request->all(), [
             'new-name' => 'required|max:255',

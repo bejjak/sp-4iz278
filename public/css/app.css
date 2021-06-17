@@ -10967,10 +10967,6 @@ form.login-form, form.register-form {
   border-left: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-.profile-pills {
-  min-width: 225px;
-}
-
 .profile-pills .nav-link {
   border-radius: 0 !important;
 }
@@ -10980,7 +10976,7 @@ form.login-form, form.register-form {
 }
 
 .ticket-container {
-  width: 450px;
+  max-width: 450px;
   min-height: 350px;
   border: 1px solid black;
 }
@@ -11156,4 +11152,12 @@ form.login-form, form.register-form {
 
 .btn-facebook:hover, .btn-google:hover {
   opacity: 1;
+}
+
+.event-button {
+  width: 8rem;
+}
+
+.fs-1-25 {
+  font-size: 1.25em;
 }

@@ -27,7 +27,6 @@ class EventController extends Controller {
         $events = $filterValue == 'all'
             ? Event::query()->where('start_date', '>=', Carbon::today())->orderBy($sort_by, $order)->paginate(6)
             : Event::where('start_date', '>=', Carbon::today())->where('sport_id', $filterValue)->orderBy($sort_by, $order)->paginate(6);
-        $events->appends(['filter' => $filterValue, 'by' => $sort_by, 'order' => $order]);
         $sports = Sport::all();
         return view('pages.events.events-offer', ['events' => $events, 'sports' => $sports, 'filter' => $filterValue]);
     }
@@ -38,9 +37,9 @@ class EventController extends Controller {
      * @return string
      */
     public function fetchData(Request $request) {
-        $sort_by = $request->get('by');
-        $order = $request->get('order');
-        $filterValue = $request->get('filter');
+        $sort_by = $request->get('by') ? $request->get('by') : 'event_id';
+        $order = $request->get('order') ? $request->get('order') : 'asc';
+        $filterValue = $request->get('filter') ? $request->get('filter') : 'all';
         if ($filterValue == 'all') {
             $events = Event::query()->where('start_date', '>=', Carbon::today())->orderBy($sort_by, $order)->paginate(6);
         }
@@ -63,9 +62,8 @@ class EventController extends Controller {
                 ->orderBy($sort_by, $order)->paginate(6);
         }
 
-        $events->appends(['filter' => $filterValue, 'by' => $sort_by, 'order' => $order]);
-
-        return view('components.events-group', ['events' => $events])->render();
+        $html = view('components.events-group', ['events' => $events])->render();
+        return response()->json(['html' => $html]);
     }
 
     /**

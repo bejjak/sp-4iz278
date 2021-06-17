@@ -42,7 +42,7 @@
             <label for="reg-confirm">Confirm Password</label>
             <input type="password" class="form-control" id="reg-confirm" placeholder="Enter Password Confirmation" name="reg_password_confirmation">
         </div>
-        <div class="d-flex justify-content-center mt-3">
+        <div class="d-flex justify-content-center mt-3 mb-3">
             <button type="submit" class="btn btn-success mt-2">
                 <i class="fas fa-user-plus me-2"></i>Create Account</button>
         </div>

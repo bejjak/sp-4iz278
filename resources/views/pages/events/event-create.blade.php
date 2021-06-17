@@ -36,8 +36,8 @@
                     <label for="create-checkbox">Create new sport</label>
                 </div>
 
-                <div class="d-flex">
-                    <div class="col-md-6 pe-2">
+                <div class="d-flex flex-wrap">
+                    <div class="col-md-6 pe-4">
                         <label for="select-sport">Select from existing sports</label>
                         <select class="form-select" name="sport" id="select-sport">
                             @foreach($sports as $sport)
@@ -45,7 +45,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-6 ps-2">
+                    <div class="col-md-6">
                         <label for="sport-input">New sport name</label>
                         <input type="text" disabled class="form-control @error('new_sport') is-invalid @enderror" value="{{old('new_sport')}}" id="sport-input" placeholder="Enter sport name" name="new_sport">
                         @error('new_sport')

@@ -4,18 +4,18 @@
     <div class="content flex-grow-1">
         <header class="page-header gradient text-white">
             @include('components.result-messages')
-            <div class="container-lg intro-section">
-                <div class="d-flex justify-content-center align-items-center">
+            <div class="container-md intro-section">
+                <div class="d-flex justify-content-center align-items-center flex-wrap-reverse">
                     <div class="col-md-6">
                         <h1 class="text-center fw-bold pt-2 pb-3">
                             <i class="fas fa-ticket-alt me-1"></i>
                             Sport Ticket
                         </h1>
-                        <p>Sport Ticket is an online website where you can purchase tickets to various sport events.
+                        <p class="text-justify fs-1-25">Sport Ticket is an online website where you can purchase tickets to various sport events.
                             We offer tickets to sports like football, basketball, motorsport, etc.</p>
-                        <div class="d-flex justify-content-center">
-                            <a class="btn btn-outline-light me-3" href="{{route('events')}}">See tickets offer</a>
-                            <a class="btn btn-outline-light" href="{{route('sports')}}">See sports</a>
+                        <div class="d-flex justify-content-center flex-wrap">
+                            <a class="btn btn-outline-light me-3 ms-3 mb-3" href="{{route('events')}}">See tickets offer</a>
+                            <a class="btn btn-outline-light me-3 ms-3 mb-3" href="{{route('sports')}}">See sports</a>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -54,11 +54,16 @@
                         </h1>
                         <p class="text-center">We currently store:</p>
                         <div>
-                            <ul class="fw-bold d-flex flex-column align-items-center">
-                                <li>{{$homeInfo['eventCount']}} events</li>
-                                <li>{{$homeInfo['sportCount']}} sports</li>
+                            <ul class="fw-bold d-flex me-3 ms-3 flex-column align-items-center list-group">
+                                <li class="d-flex list-group-item list-group-item-info list-group-item-action justify-content-between align-items-center">
+                                    Events
+                                    <span class="badge bottom-0 bg-primary rounded-pill">{{$homeInfo['eventCount']}}</span>
+                                </li>
+                                <li class="d-flex list-group-item list-group-item-info list-group-item-action justify-content-between align-items-center">
+                                    Sports
+                                    <span class="badge bottom-0 bg-primary rounded-pill">{{$homeInfo['sportCount']}}</span>
+                                </li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
